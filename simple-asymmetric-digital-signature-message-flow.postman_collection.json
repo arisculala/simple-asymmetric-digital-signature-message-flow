@@ -1,0 +1,80 @@
+{
+	"info": {
+		"_postman_id": "61a28917-8168-4fe9-b4a8-66a205ea03f1",
+		"name": "simple-asymmetric-digital-signature-message-flow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15649124"
+	},
+	"item": [
+		{
+			"name": "send message",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();",
+							"pm.environment.set(\"encryptedMessage\", response.encryptedMessage);",
+							"pm.environment.set(\"signature\", response.signature);",
+							"pm.environment.set(\"senderPublicKey\", response.senderPublicKey);",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"message\": \"This is the secret message\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/send-message",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"send-message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "receive message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"encryptedMessage\": \"bC8YLuzxQiFEtaZDV/sEAptskYbEULWbxayKyefv55yCeuYE/PPPOsyH+j6J8NIXOpt9r0KoLMq2rT0J3t5efAoexBAdHKwChZVrQIwVRJRLJjGpBn6uANvJBkddtgbBCtCIGRHciaWXNvavA0Xl/F8sUd04E32poxHKy4Az+IjPhgBkYs+H4gC/53BsKJ/3U/mPzjfV847GSVj7BIzswo0isBkfHIENLxEjbCtADkbV0wwhxoYy8xI1ew2pwX9F3Kjib/dztCZj0bXdoWkE6b7SFEJuzZniXDLgLe6uEJgMw1So+lO/ElsUCHXlTJvl6RZsxOL23B5QAskf/FSSOQ==\",\n    \"signature\": \"R7R7q+5IxDvbgZpCGDYJh83uaxFeolQRHJY1fuzka3DSe2c0mVJYwuPmSc/YgM7QmPPHAdtWh5MV7QCI7lzTTcFHBeA8DLkz2hkO6rdWniz07f0myayePjx0mFupI5Tp0e2OwLy88fV5gagV+8OfSV99TCbWKmFbSsGV3y26XJP4xcDbJcdfqhSb6yOcq+hNETyiysexxz8q6ZY0IgH/1TTMFEYP2sH2P+/MdijAWO2u92jSUEgelwtxUz7f/4KXddnOdOME2gfhu4hCBnDRSiIsoN3Bs1wBKcWhix16o696/yNBtlO8YzkbwIzRtp7GuK/5E/ikQwR7AJZPklZKiQ==\",\n    \"senderPublicKey\": \"-----BEGIN RSA PUBLIC KEY-----\\nMIIBCgKCAQEAtNjLnNLgCtIso5wh3dHfNWwoChp2udB8x31VNYIe49b2ZqkhDbc3\\nkeC/CvGDpDX2jwb+BZGdmfr0VXihBil0pbE6FV+deL/6S8/Xv3AXgGdIXw026vWD\\n4CikFxC/2rUL6IdF+e5KAQfoQLY8CI1sE6XRqi06IZoeHqbFgPvJgSKtNKFYBIzp\\nlzVMAqfv9NkdlVNoFFPpfQXGgrKd0nRoSotkes1fqqR9rlYOPVaLsrHaei5CHBY+\\nhaIjdLkD12CIfFBWC/8TMWCBM0NqX8qs4mqA8vzIEmx+m3EXgcdP0A+ef5R66/d3\\ngxzQTvtlDo2g44UhFWajorw8LwLPfEoXKwIDAQAB\\n-----END RSA PUBLIC KEY-----\\n\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/receive-message",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"receive-message"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
